@@ -1,0 +1,74 @@
+.home {
+    margin-top: 3em;
+    //background-color: #2e2e2e;
+    //border-radius: 13px;
+
+    .contenedor {
+        background-color: #2e2e2e;
+        border-radius: 13px;
+        padding-bottom: 5em;
+    }
+
+    .weather-contenedor {
+        margin-top: 3em;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: black;
+        }
+
+        .error-image {
+            width: 15em;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: wheat;
+    }
+
+    .principal-image {
+        width: 60em;
+        border-radius: 13px;
+    }
+
+    .searcher {
+        width: 30em;
+        margin: 0 auto;
+
+        .form-search-city {
+            box-shadow: 0 0.5em 1em rgba(white, 0.15);
+            border-style: solid;
+            border-radius: 13px;
+            border-width: 0.01em;
+            border-color: white;
+
+            label {
+                color: white;
+            }
+        }
+    }
+
+    .card-group {
+        //width: 50em;
+        margin: 0 auto;
+    }
+
+    .weather-card {
+        width: 10em;
+
+        .weather-image {
+            width: 18em;
+            height: 10em;
+            margin: 0 auto;
+        }
+    }
+}

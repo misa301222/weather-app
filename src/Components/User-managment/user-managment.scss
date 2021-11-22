@@ -1,0 +1,18 @@
+.user-managment {
+    margin-top: 3em;
+    background-color: #2e2e2e;
+    border-radius: 13px;
+    color: wheat;
+    hr {
+        color: wheat;
+    }
+
+    .user-info {
+        overflow-y: auto;
+        height:30em;
+
+        .table-users{
+            border-radius: 13px;
+        }
+    }
+}

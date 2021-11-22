@@ -1,0 +1,24 @@
+.navbar-logged {    
+    #navbarNav {
+
+        hr{
+            color: wheat;
+        }
+
+        ul {
+            li {
+                a {
+                    color: wheat;
+                }
+
+                a:hover{
+                    color: #AB9B7D;
+                }
+
+                ul {
+                    background-color: #2e2e2e;
+                }
+            }
+        }
+    }
+}

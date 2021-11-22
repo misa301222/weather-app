@@ -1,0 +1,41 @@
+.profile-container {
+    .card {
+        width: 15em;
+        border-radius: 13px !important;
+    }
+
+    .image-card {
+        //margin: 0 auto;
+        padding: 2em;
+    }
+    .tab-content {
+        .tab-pane {
+            
+
+            .container-tab {
+                height: 40em;
+                background-color: #2e2e2e;
+                border-radius: 13px;
+                padding-top: 5em;
+                label {
+                    color: white;
+                }
+            }
+        }        
+    }
+
+    .nav-item {
+        .nav-link {
+            //background-color: gray;
+            transition: border-radius 0.3s ease-out;
+        }
+
+        .nav-link.active {
+            font-style: italic;
+            text-decoration: underline;
+            color: wheat;
+            background-color: #2e2e2e;
+            border-radius: 15px;
+        }
+    }
+}

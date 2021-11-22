@@ -1,0 +1,23 @@
+.weatherList {
+    margin-top: 3em;
+    //background-color: #2e2e2e;
+    border-radius: 13px;
+    padding-bottom: 3em;
+
+    h2 {
+        color: black;
+    }
+
+    .card-detail {
+        width: 40em;
+        border-style: solid;
+        border-radius: 13px;
+        border-width: 0.01em;
+        //border-color: black;
+        //box-shadow: 0 0.5em 1em rgba(white, 0.30);
+    }
+
+    .card-image {
+        margin-top: 0.5em;
+    }
+}

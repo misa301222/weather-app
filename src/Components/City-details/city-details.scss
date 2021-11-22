@@ -1,0 +1,25 @@
+.city-details {
+    .searcher {
+        margin-bottom: 3em;
+    }
+
+    .all-cities {        
+        //background-color: #2e2e2e;
+
+        .city-element {
+            padding-top: 4em;
+
+            .col-see-details {
+                margin-bottom: 1em;
+            }
+
+            .card-detail {
+                width: 35em;
+            }
+        }
+
+        .error-image {
+            width: 15em;
+        }
+    }
+}
