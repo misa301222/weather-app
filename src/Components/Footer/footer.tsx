@@ -28,7 +28,7 @@ function Footer() {
                     </Column>
                     <Column>
                         <Heading>Services</Heading>
-                        <FooterLink href="#">Writing</FooterLink>
+                        <FooterLink href="/send-job-application">Send Job Application</FooterLink>
                         <FooterLink href="#">Internships</FooterLink>
                         <FooterLink href="#">Coding</FooterLink>
                         <FooterLink href="#">Teaching</FooterLink>

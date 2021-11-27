@@ -143,43 +143,46 @@ function Home() {
 
     return (
         <div className="container home">
-            <div className="contenedor">
-                <br></br>
-                <h1 className="text-decoration-underline"> Weather app <i className="fas fa-laptop"></i></h1>
-                <br></br>
-                <br></br>
+            <div className="contenedor card shadow">
+                <div className="card-body">
+                    <br></br>
+                    <h1 className="text-decoration-underline"> WeatherApp <i className="fas fa-laptop"></i></h1>
+                    <br></br>
+                    <br></br>
 
-                <img src={cloudImage} className="principal-image" alt="ImageCloud" />
+                    <img src={cloudImage} className="principal-image" alt="ImageCloud" />
 
-                <br></br>
-                <br></br>
-                <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
 
-                { /* TODO ARREGLAR IMAGENES CUANDO SE ESCRIBE ACA */}
-                <div className="searcher">
-                    <h1> <i className="fas fa-building"></i> </h1>
-                    <form className="row form-search-city p-3">
-                        <div className="col-sm-4">
-                            <label htmlFor="inputCityId" className="col col-form-label fw-bold">Search City:</label>
-                        </div>
-                        <div className="col-sm-6 ">
-                            <input className="form-control" list="datalistOptions" id="inputCityId" placeholder="Select A City" onChange={handleOnChangeCity} />
-                            <datalist id="datalistOptions">
-                                <option value={0}>Open this select menu</option>
-                                {
-                                    cities.map(city => (
-                                        <option key={city.cityId} value={city.cityId}>{city.cityName}</option>
-                                    ))
-                                }
-                            </datalist>
-                        </div>
-                        <div className="col">
-                            <Link to={{ pathname: `/city-details/${selectedCity}`, state: { SelectedCity: selectedCity } }}>
-                                <button type="button" className="btn btn-light btn-outline-dark"><i className="fas fa-search"></i></button>
-                            </Link>
-                        </div>
-                    </form>
+                    { /* TODO ARREGLAR IMAGENES CUANDO SE ESCRIBE ACA */}
+                    <div className="searcher">
+                        <h1> <i className="fas fa-building"></i> </h1>
+                        <form className="row form-search-city p-3">
+                            <div className="col-sm-4">
+                                <label htmlFor="inputCityId" className="col col-form-label fw-bold">Search City:</label>
+                            </div>
+                            <div className="col-sm-6 ">
+                                <input className="form-control" list="datalistOptions" id="inputCityId" placeholder="Select A City" onChange={handleOnChangeCity} />
+                                <datalist id="datalistOptions">
+                                    <option value={0}>Open this select menu</option>
+                                    {
+                                        cities.map(city => (
+                                            <option key={city.cityId} value={city.cityId}>{city.cityName}</option>
+                                        ))
+                                    }
+                                </datalist>
+                            </div>
+                            <div className="col">
+                                <Link to={{ pathname: `/city-details/${selectedCity}`, state: { SelectedCity: selectedCity } }}>
+                                    <button type="button" className="btn btn-light btn-outline-dark"><i className="fas fa-search"></i></button>
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
 
             <div className="weather-contenedor">

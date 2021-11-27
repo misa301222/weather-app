@@ -24,6 +24,7 @@ class AuthService {
                     case 1:
                         if (response.data.dataSet.token) {
                             localStorage.setItem("user", response.data.dataSet.email);
+                            localStorage.setItem('fullName', response.data.dataSet.fullName);
                             localStorage.setItem('token', response.data.dataSet.token);
                             localStorage.setItem("roles", response.data.dataSet.roles);
                             console.log('Logged Succesfully as: ' + response.data.dataSet.email);

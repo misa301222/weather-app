@@ -87,7 +87,8 @@ function AboutUs() {
                             <div className="col">
                                 <img src={Employee} className="employee-photo" alt="employeephoto"></img>
                             </div>
-                            <div className="col"> <Link to="/send-job-application">Apply here!!</Link></div>
+                            <div className="col"> <p className=""> We are always searching for good talent. We are always interested in your skills. If you feel capable of working really efficient. 
+                            <Link to="/send-job-application">Apply here!!</Link></p></div>
 
                         </div>
                     </div>

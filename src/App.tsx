@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from "react-router-dom";
 import Home from './Components/Home/home';
@@ -22,19 +22,35 @@ import UserManagment from './Components/User-managment/user-managment';
 import Register from './Components/Register/register';
 import JobApplications from './Components/Job-applications/job-applications';
 import SendJobApplication from './Components/Send-job-application/send-job-application';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [currentTheme, setCurrentTheme] = useState<any | null>('');
 
   const logout = () => {
     return authService.clearData();
   }
 
+  const getTheme = () => {
+    console.log('store: ' + localStorage.getItem("theme"));
+    setCurrentTheme(localStorage.getItem("theme"));
+    //return localStorage.getItem("theme");
+  }
+
+  useEffect(() => {
+    console.log('use');
+    getTheme();
+  }, [currentTheme])
 
   return (
-    <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-logged">
+    // <div className="App">
+    <div className={currentTheme === "dark" ? 'App-dark' : 'App'}>
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-logged shadow">
         <NavbarLogged />
       </nav>
+      <ScrollToTop />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/add-country" component={AddCountry}></Route>

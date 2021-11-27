@@ -58,7 +58,7 @@ function Login() {
 
     return (
         <div className="login">
-            <div className="card">
+            <div className="card shadow">
                 <div className="card-header">
                     <h4 className="fst-italic">Login here</h4>
                 </div>

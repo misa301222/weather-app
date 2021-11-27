@@ -1,0 +1,208 @@
+.App {
+  text-align: center;
+  label {
+    color: black !important;
+  }
+}
+
+.App.light {
+  background-color: white !important;
+  color: black;
+}
+
+.App-dark {
+  background-color: #18191a !important;
+  color: white;
+  text-align: center;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: white;
+  }
+
+  .card {
+    background-color: #242627 !important;
+    color: white;
+    border: 1px solid gray;
+
+    .card-header {
+      background-color: #18191a !important;
+      color: white;
+    }
+
+    .card-body {
+      //background-color: #242627;
+      color: white;
+    }
+
+    .card-footer {
+      background-color: #18191a !important;
+    }
+  }
+
+  .bg-warning {
+    background-color: #ffc107 !important;
+    //background-color: yellow !important;
+  }
+
+  .bg-success {
+    background-color: #198754 !important;
+  }
+
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+
+  .list-group-item {
+    background-color: #242627 !important;
+    color: white;
+    border-color: gray;
+  }
+
+  .shadow {
+    box-shadow: 0 0.5em 1em rgb(253 248 240 / 15%) !important;
+    //background-color: white !important;
+  }
+
+  .btn-dark {
+    border-color: white;
+  }
+
+  .btn-outline-dark:disabled {
+    color: white;
+  }
+
+  .btn-outline-dark:hover {
+    border-color: white;
+  }
+
+  .table-light {
+    background-color: #18191a !important;
+  }
+
+  table {
+    background-color: #18191a !important;
+    thead {
+      tr {
+        background-color: black !important;
+      }
+    }
+    color: white;
+  }
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.navbar-brand {
+  color: wheat !important;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  //padding-bottom: 15em !important;
+}
+
+:root {
+  --blue: rgb(26, 57, 87);
+  --white: rgb(236, 236, 236);
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-weight: var(--font-weight);
+  transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
+}
+
+body.light {
+  --background-color: var(--white) !important;
+  --text-color: var(--blue);
+  --font-weight: 400;
+  /* --image: url("../day.jpg"); */
+}
+
+body.dark {
+  --background-color: var(--blue) !important;
+  --text-color: var(--white);
+  --font-weight: 500;
+  /* --image: url("../night.jpg"); */
+}
+/*
+nav {
+  padding: 1rem 25%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: var(--text-color);
+}
+
+nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--background-color);
+}
+
+#image {
+  width: 100%;
+  height: 300px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: background-image 0.7s ease-in-out;
+  background-image: var(--image);
+}
+
+nav a:hover {
+  color: rgb(12, 216, 189);
+}
+
+h1 {
+  text-align: center;
+  margin: 3rem 0 2rem 0;
+}
+
+p {
+  width: 40%;
+  margin: 1rem auto;
+  line-height: 1.6;
+}
+*/

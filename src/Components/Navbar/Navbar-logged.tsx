@@ -24,29 +24,26 @@ function NavbarLogged() {
 
   return (
     <div className="container-fluid navbar-logged">
-      <Link className="navbar-brand" to="/">Weather</Link>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      <Link className="navbar-brand" to="/">WeatherApp <i className="fas fa-cloud"></i></Link>      
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav static">
-          <li className="nav-item">
-            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+          <li className="nav-item li-element">
+            <Link className="nav-link active" aria-current="page" to="/">Home</Link>            
           </li>
         </ul>
         <ul className="navbar-nav">
 
-          <li className="nav-item">
+          <li className="nav-item li-element">
             <Link className="nav-link active" aria-current="page" to="/search-by-city">Search By City</Link>
           </li>
 
           {!user ?
             <div className="d-flex justify-content-start">
-              <li className="nav-item">
+              <li className="nav-item li-element">
                 <Link className="nav-link active" aria-current="page" to="/login">Login</Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item li-element">
                 <Link className="nav-link active" aria-current="page" to="/register">Register</Link>
               </li>
             </div>
@@ -54,7 +51,7 @@ function NavbarLogged() {
           }
           {user ?
 
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown dropdown-element li-element">
 
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Profile
@@ -75,6 +72,9 @@ function NavbarLogged() {
 
             </li> : null
           }
+        </ul>
+        <ul className="navbar-nav right-navbar">
+          <li className="nav-item text-white li-element"><Link to="/profile" className="text-decoration-none"> Current Logged in as: {user}</Link></li>
         </ul>
       </div>
     </div>

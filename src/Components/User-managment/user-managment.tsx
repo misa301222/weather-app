@@ -39,7 +39,7 @@ function UserManagment() {
             <h3>User Managment <i className="fas fa-users"></i></h3>
             <hr></hr>
             <div className="user-info">
-                <table className="table table-bordered table-light table-users">
+                <table className="table table-bordered table-users">
                     <thead>
                         <tr>
                             <th scope="col">Email</th>
