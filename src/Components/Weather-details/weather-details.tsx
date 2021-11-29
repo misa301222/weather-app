@@ -146,7 +146,7 @@ function WeatherDetails() {
     }, [state])
 
     return (
-        <div className="container weather-details">
+        <div className="container weather-details container-data">
             <br></br>
             <br></br>
             <h3> {cityName ? cityName : null} <i className="fas fa-sun"></i> </h3>

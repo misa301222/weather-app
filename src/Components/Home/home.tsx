@@ -72,12 +72,18 @@ function Home() {
     }
 
     const getAllTemperaturesByCityId = async (cityId: number) => {
-        await axios.get(temperatureURL + '/GetTemperatureByCityId/' + cityId).then(response => {
+        const dateToday = new Date().toLocaleDateString();
+        let dateTodayOrdered;
+        if (dateToday) {
+            dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
+        }
+        await axios.get(temperatureURL + '/GetTemperatureByCityIdAndDateTemperatureNextFive/' + cityId + '/' + dateTodayOrdered).then(response => {
             console.log(response);
             setTemperatures(response.data);
         }).catch(err => {
-            console.log(err);
+            console.log(err);            
         });
+
     }
 
     const getDescriptionTemperatureById = async () => {
@@ -142,7 +148,7 @@ function Home() {
     }, []);
 
     return (
-        <div className="container home">
+        <div className="container home container-data">
             <div className="contenedor card shadow">
                 <div className="card-body">
                     <br></br>
@@ -191,21 +197,59 @@ function Home() {
                 {!userName ? setNotLoggedMessageText() : null}
                 {city.cityName ? <h4>Weather of {city.cityName}</h4> : null}
                 <br></br>
-                <div className="card-group">
+                <div className="d-flex justify-content-evenly">
                     {
-                        temperatures.length > 0 ?
+                        temperatures[0].cityId > 0 ?
                             temperatures.slice(0, 3).map((temperature, index) => (
                                 <div key={index} className="card weather-card shadow">
                                     { /* style={{ transform: size.to(s => `scale(${s})`) }} */}
                                     <img src={image(temperature.descriptionTemperature)} className="weather-image shadow-sm card-img-top" alt="WeatherPhoto" />
                                     <div className="card-body">
-                                        <h5 className="card-text">{temperature.dateTemperature.split('T')[0]}</h5>
-                                        <h5 className="card-text">{text(temperature.descriptionTemperature)}</h5>
-                                        <h5 className="card-text">Max: {temperature.maxTemperature}&deg;</h5>
-                                        <h5 className="card-text">Min: {temperature.minTemperature}&deg;</h5>
-                                        <h5 className="card-text">Precipitation: {temperature.precipitationTemperature}%</h5>
-                                        <h5 className="card-text">Wind: {temperature.windTemperature} km/s</h5>
-                                        <div className="mb-3 text-center"></div>
+                                        <div className="row">
+                                            <div className="col">
+                                                {temperature.dateTemperature ? temperature.dateTemperature.split('T')[0] : null}
+                                            </div>
+                                        </div>
+                                        <br></br>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                {temperature.minTemperature}&deg;
+                                            </div>
+                                            <div className="col">
+                                                {temperature.maxTemperature}&deg;
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <small className="text-muted">Min</small>
+                                            </div>
+                                            <div className="col">
+                                                <small className="text-muted">Max</small>
+                                            </div>
+                                        </div>
+
+                                        <br></br>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                {temperature.precipitationTemperature}%
+                                            </div>
+                                            <div className="col">
+                                                {temperature.windTemperature}%
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <small className="text-muted">Precipitation</small>
+                                            </div>
+                                            <div className="col">
+                                                <small className="text-muted">Wind</small>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div className="card-footer">
                                         <Link to={{ pathname: `/weather-details/${temperature.cityId}/${temperature.dateTemperature}`, state: { Temperature: temperature } }}>

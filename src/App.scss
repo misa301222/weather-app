@@ -12,8 +12,8 @@
 
 .App-dark {
   background-color: #18191a !important;
-  color: white;
-  text-align: center;
+  color: white !important;
+  text-align: center !important;
 
   h1,
   h2,
@@ -21,22 +21,22 @@
   h4,
   h5,
   h6 {
-    color: white;
+    color: white !important;
   }
 
   .card {
     background-color: #242627 !important;
-    color: white;
-    border: 1px solid gray;
+    color: white !important;
+    border: 1px solid gray !important;
 
     .card-header {
       background-color: #18191a !important;
-      color: white;
+      color: white !important;
     }
 
     .card-body {
       //background-color: #242627;
-      color: white;
+      color: white !important;
     }
 
     .card-footer {
@@ -69,15 +69,15 @@
   }
 
   .btn-dark {
-    border-color: white;
+    border-color: white !important;
   }
 
   .btn-outline-dark:disabled {
-    color: white;
+    color: white !important;
   }
 
   .btn-outline-dark:hover {
-    border-color: white;
+    border-color: white !important;
   }
 
   .table-light {
@@ -91,7 +91,11 @@
         background-color: black !important;
       }
     }
-    color: white;
+    color: white !important;
+  }
+  .error-image {
+    background-color: white;
+    border-radius: 13px;
   }
 }
 
@@ -134,8 +138,8 @@
   }
 }
 
-.container {
-  //padding-bottom: 15em !important;
+.container-data {
+  padding-bottom: 15em !important;
 }
 
 :root {

@@ -1,13 +1,42 @@
-import React from "react"
 import { useHistory } from "react-router"
 import "././DarkMode.scss"
+import axios from 'axios';
+import Swal from "sweetalert2";
 
+const userURL = "https://localhost:5001/api/User";
 const DarkMode = () => {
     const history = useHistory();
 
+    const changeThemeByEmail = async (themeName: string) => {
+        const user = localStorage.getItem('user');
+        let themeId;
+        if (themeName === 'light') {
+            themeId = 0;
+        } else {
+            themeId = 1;
+        }
+        let body = {
+            Email: user,
+            DefaultTheme: themeId
+        }
+
+        await axios.post(userURL + '/UpdateDefaultTheme', body).then(response => {
+            console.log(response);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: response.data.responseMessage,
+                showConfirmButton: false,
+                timer: 1100
+            }).then(function () {
+                history.go(0);
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     let clickedClass = "clicked"
-    //const body = document.body;
-    //const colorApp = document.getElementsByClassName('App');
     const lightTheme = "light"
     const darkTheme = "dark"
     let theme: any;
@@ -16,32 +45,18 @@ const DarkMode = () => {
         theme = localStorage.getItem("theme");
     }
 
-    //theme = "darkTheme";
-
-    if (theme === lightTheme || theme === darkTheme) {
-        //body.classList.add(theme)
-    } else {
-        //body.classList.add(lightTheme)
-    }
-
     const switchTheme = (e: any) => {
-        console.log('click');
         if (theme === darkTheme) {
-            console.log('switch if ' + theme);
-            //body.classList.replace(darkTheme, lightTheme)
-            e.target.classList.remove(clickedClass)
-            //e.target.classList.add('nope');
-            localStorage.setItem("theme", "light")
-            theme = lightTheme
+            e.target.classList.remove(clickedClass);
+            localStorage.setItem("theme", "light");
+            theme = lightTheme;
+            changeThemeByEmail(theme);
         } else {
-            console.log('switch else ' + theme);
-            //body.classList.replace(lightTheme, darkTheme)
-            e.target.classList.add(clickedClass)
-            localStorage.setItem("theme", "dark")
-            theme = darkTheme
+            e.target.classList.add(clickedClass);
+            localStorage.setItem("theme", "dark");
+            theme = darkTheme;
+            changeThemeByEmail(theme);
         }
-
-        history.go(0);
     }
 
     return (

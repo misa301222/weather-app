@@ -24,11 +24,11 @@ function NavbarLogged() {
 
   return (
     <div className="container-fluid navbar-logged">
-      <Link className="navbar-brand" to="/">WeatherApp <i className="fas fa-cloud"></i></Link>      
+      <Link className="navbar-brand" to="/">WeatherApp <i className="fas fa-cloud"></i></Link>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav static">
           <li className="nav-item li-element">
-            <Link className="nav-link active" aria-current="page" to="/">Home</Link>            
+            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
           </li>
         </ul>
         <ul className="navbar-nav">
@@ -73,9 +73,12 @@ function NavbarLogged() {
             </li> : null
           }
         </ul>
-        <ul className="navbar-nav right-navbar">
-          <li className="nav-item text-white li-element"><Link to="/profile" className="text-decoration-none"> Current Logged in as: {user}</Link></li>
-        </ul>
+        {
+          user ?
+            <ul className="navbar-nav right-navbar">
+              <li className="nav-item text-white li-element"><Link to="/profile" className="text-decoration-none"> Current Logged in as: {user}</Link></li>
+            </ul> : null
+        }
       </div>
     </div>
 

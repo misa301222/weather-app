@@ -25,7 +25,7 @@ function ShowCountry() {
 
 
     return (
-        <div className="container">
+        <div className="container container-data">
             <h1> All Countries </h1>
             <hr></hr>
 

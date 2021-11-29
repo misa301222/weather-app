@@ -3,7 +3,7 @@ import '././admin-tools.scss';
 
 function AdminTools() {
     return (
-        <div className="container admin-tools-component">
+        <div className="container admin-tools-component container-data">
             <br></br>
 
             <h1 className="">

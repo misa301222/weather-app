@@ -32,7 +32,7 @@ function SearchByCity() {
 
 
     return (
-        <div className="container search-by-city">
+        <div className="container search-by-city container-data">
             <div className="searcher">
 
                 <h1 className="header">

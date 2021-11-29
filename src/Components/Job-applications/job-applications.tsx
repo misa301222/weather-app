@@ -276,7 +276,7 @@ function JobApplications() {
     }, [])
 
     return (
-        <div className="container job-application-component">
+        <div className="container job-application-component container-data">
             <div className="row title">
                 <h2>
                     Application Managmnet <i className="fas fa-tasks"></i>

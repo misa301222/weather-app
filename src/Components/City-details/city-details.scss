@@ -14,7 +14,12 @@
             }
 
             .card-detail {
-                width: 35em;
+                width: 50em;
+
+                .card-image {
+                    //width: 15em;
+                }
+                //height: 15em;
             }
         }
 

@@ -92,7 +92,7 @@ function CityDetails() {
             console.log(err);
         });
     }
-
+    
     useEffect(() => {
         getDescriptionTemperatures();
         getAllTemperaturesByCityId(state.SelectedCity);
@@ -101,7 +101,7 @@ function CityDetails() {
     }, [state])
 
     return (
-        <div className="container city-details">
+        <div className="container city-details container-data">
             <br></br>
             <h2 className="">
                 {city.cityName} <i className="fas fa-sun"></i>
@@ -109,7 +109,7 @@ function CityDetails() {
 
             <br></br>
 
-            <div className="searcher">                
+            <div className="searcher">
                 <form className="row shadow p-3">
                     <div className="col-sm-4">
                         <label htmlFor="inputCityId" className="col col-form-label fw-bold"><i className="fas fa-building"></i> Search City:</label>
@@ -135,41 +135,30 @@ function CityDetails() {
 
             <div className="all-cities">
                 {
-
                     temperatures.length ?
                         temperatures.map((city, i) => (
                             <div className="container city-element" key={i}>
                                 <div className="row">
                                     <div className="col">
-                                        <div className="card mb-3 bg-light card-detail shadow">
-                                            <img src={image(city.descriptionTemperature)} className="card-img-top" alt="..." />
-                                            <div className="card-body">
-                                                <h5 className="card-title">{city.dateTemperature.split('T')[0]}</h5>
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.maxTemperature}&deg;</h5>
-                                                        <label className="card-text"><small className="text-muted">Max</small></label>
-                                                    </div>
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.minTemperature}&deg;</h5>
-                                                        <label className="card-text"><small className="text-muted">Min</small></label>
+                                        <div className="card bg-light card-detail shadow">
+                                            <div className="row g-0">
+                                                <div className="col-md-4">
+                                                    <img src={image(city.descriptionTemperature)} className="img-fluid rounded-start" alt="..." />
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{city.dateTemperature ? city.dateTemperature.split('T')[0] : null}</h5>
+                                                        <div className="row">
+                                                            <div className="col"> {city.maxTemperature}&deg; </div>
+                                                            <div className="col"> {city.minTemperature}&deg; </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col"> <small className="text-muted">Max</small> </div>
+                                                            <div className="col"> <small className="text-muted">Min</small> </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-
-                                                <br></br>
-
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.precipitationTemperature}%</h5>
-                                                        <label className="card-text"><small className="text-muted">Precipitation</small></label>
-                                                    </div>
-
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.windTemperature} km/s</h5>
-                                                        <label className="card-text"><small className="text-muted">Wind</small></label>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
 

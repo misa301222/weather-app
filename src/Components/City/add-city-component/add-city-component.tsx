@@ -62,7 +62,7 @@ function AddCity() {
     }
 
     return (
-        <div className="container">
+        <div className="container container-data">
             <h1>Add City</h1>
             <hr></hr>
 

@@ -110,7 +110,7 @@ function Register() {
     }, [])
 
     return (
-        <div className="container register-component">
+        <div className="container register-component container-data">
 
             <div className="card">
                 <h5 className="card-header">Create an Account</h5>

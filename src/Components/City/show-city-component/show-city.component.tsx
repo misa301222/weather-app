@@ -23,7 +23,7 @@ function ShowCity() {
     }, []);
 
     return (
-        <div className="container">
+        <div className="container container-data">
             <h1> Show Cities</h1>
             <hr></hr>
 

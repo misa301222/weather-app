@@ -36,7 +36,10 @@ function AddCountry() {
     }
 
     return (
-        <div className="container text-start">
+        <div className="container text-start container-data">
+            <br></br>
+            <br></br>
+            <br></br>
             <div className="card">
                 <div className="card-header">
                     Add New Country

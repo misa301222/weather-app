@@ -246,7 +246,7 @@ function SendJobApplication() {
     }, [])
 
     return (
-        <div className="container send-job-application-component">
+        <div className="container send-job-application-component container-data">
             {isLoggedIn ?
                 !isApplicationAlreadySent ?
                     <div className="card shadow">
