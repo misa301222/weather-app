@@ -2,16 +2,17 @@
     #navbarNav {
         display: flex;
         hr {
-            color: wheat;
+            color: #FFD4A8;
         }
 
         ul {
             .li-element {
                 padding-left: 0.2em;
-                padding-right: 0.2em;
+                padding-right: 0.5em;
 
                 a {
-                    color: wheat;
+                    // color: wheat;
+                    color: #FFD4A8;
                     border-bottom: 0px solid purple;
                     transition: border-bottom 0.2s ease-in;
                     padding-bottom: 6px;
@@ -31,7 +32,8 @@
 
         .dropdown-element {
             a {
-                color: wheat;
+                //color: wheat;
+                color: #FFD4A8;
                 //border-bottom: 0px solid green;
                 transition: border-bottom 0.3s ease-in;
             }
@@ -46,11 +48,13 @@
                 background-color: #2e2e2e;
                 li {
                     a {
-                        color: wheat;
+                        // color: wheat;
+                        color: #FFD4A8;
                     }
 
                     a:hover {
-                        background-color: wheat;
+                        // background-color: wheat;
+                        color: #FFD4A8;
                         color: black;
                         border-bottom: none;
                         padding-bottom: 4px;

@@ -24,6 +24,10 @@ import JobApplications from './Components/Job-applications/job-applications';
 import SendJobApplication from './Components/Send-job-application/send-job-application';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import { useEffect, useState } from 'react';
+import SearchByCountry from './Components/Search-by-country/search-by-country';
+import CountryDetails from './Components/Country-details/country-details';
+import AddTemperatureNotification from './Components/TemperatureNotification/add-temperatureNotification-component/add-temperatureNotification';
+import ShowTemperatureNotification from './Components/TemperatureNotification/show-temperatureNotification-component/show-temperatureNotification';
 
 function App() {
 
@@ -47,7 +51,7 @@ function App() {
   return (
     // <div className="App">
     <div className={currentTheme === "dark" ? 'App-dark' : 'App'}>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-logged shadow">
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-logged">
         <NavbarLogged />
       </nav>
       <ScrollToTop />
@@ -60,9 +64,13 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/add-temperature" component={AddTemperature} />
         <Route path="/show-temperature" component={ShowTemperature} />
+        <Route path="/add-temperatureNotification" component={AddTemperatureNotification} />
+        <Route path="/show-temperatureNotification" component={ShowTemperatureNotification} />
         <Route path="/admin-tools" component={AdminTools} />
         <Route path="/profile" component={Profile} />
+        <Route path="/search-by-country" component={SearchByCountry} />
         <Route path="/search-by-city" component={SearchByCity} />
+        <Route path="/country-details/:cityId" component={CountryDetails} />
         <Route path="/city-details/:cityId" component={CityDetails} />
         <Route path="/weather-details/:cityId/:dateTemp" component={WeatherDetails} />
         <Route path="/about-us" component={AboutUs} />

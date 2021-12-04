@@ -112,7 +112,7 @@ function Register() {
     return (
         <div className="container register-component container-data">
 
-            <div className="card">
+            <div className="card shadow">
                 <h5 className="card-header">Create an Account</h5>
                 <div className="card-body">
                     <form className="" onSubmit={handleOnSubmitForm}>

@@ -24,8 +24,24 @@
     color: white !important;
   }
 
+  .text-danger {
+    color: #d9534f !important;
+  }
+
+  .text-warning {
+    color: #f0ad4e !important;
+  }
+
+  .text-success {
+    color: #5cb85c !important;
+  }
+
+  .purple {
+    color: #eec4f5 !important;
+  }
+
   .card {
-    background-color: #242627 !important;
+    background-color: #2e2e2e !important;
     color: white !important;
     border: 1px solid gray !important;
 
@@ -64,8 +80,15 @@
   }
 
   .shadow {
-    box-shadow: 0 0.5em 1em rgb(253 248 240 / 15%) !important;
-    //background-color: white !important;
+    box-shadow: 0 0.3em 0.5em rgb(253 248 240 / 10%) !important;
+  }
+
+  .pink-color {
+    color: rgb(255, 168, 255) !important;
+  }
+
+  .yellowish {
+    color: #ffd4a8 !important;
   }
 
   .btn-dark {
@@ -126,7 +149,12 @@
 }
 
 .navbar-brand {
-  color: wheat !important;
+  color: #ffd4a8 !important;
+  transition: color 0.2s ease-in;
+}
+
+.navbar-brand:hover {
+  color: pink !important;
 }
 
 @keyframes App-logo-spin {

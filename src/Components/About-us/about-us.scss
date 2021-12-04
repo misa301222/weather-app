@@ -7,6 +7,22 @@
         border-radius: 13px;
     }
 
+    .nav-item {
+        .nav-link {
+            color: black;
+            background-color: rgb(214, 214, 214);  
+            transition: border-radius 0.3s ease-out;
+        }
+
+        .nav-link.active {
+            font-style: italic;
+            text-decoration: underline;
+            color: #ffd4a8;
+            background-color: #181818;
+            border-radius: 15px;
+        }
+    }
+
     .tab-content > .tab-pane {
         .tab-info {
             height: auto;

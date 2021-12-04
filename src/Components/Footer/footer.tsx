@@ -13,12 +13,13 @@ function Footer() {
 
     return (
         <Box className="bg-dark">
-            <h1 style={{
-                color: "wheat",
+            <h1 className="yellowish" style={{
+                color: "#FFD4A8",
                 textAlign: "center",
-                marginTop: "-50px"
+                marginTop: "-50px",
+                marginBottom: '0.7em'                
             }}>
-                Weather App &#x2764;
+                <u> Weather App </u><i className="fas fa-laptop"></i> 
             </h1>
             <Container>
                 <Row>
@@ -28,17 +29,10 @@ function Footer() {
                     </Column>
                     <Column>
                         <Heading>Services</Heading>
-                        <FooterLink href="/send-job-application">Send Job Application</FooterLink>
-                        <FooterLink href="#">Internships</FooterLink>
-                        <FooterLink href="#">Coding</FooterLink>
-                        <FooterLink href="#">Teaching</FooterLink>
+                        <FooterLink href="/send-job-application">Send Job Application</FooterLink>                        
                     </Column>
                     <Column>
-                        <Heading>Contact Us</Heading>
-                        <FooterLink href="#">Uttar Pradesh</FooterLink>
-                        <FooterLink href="#">Ahemdabad</FooterLink>
-                        <FooterLink href="#">Indore</FooterLink>
-                        <FooterLink href="#">Mumbai</FooterLink>
+                        <Heading>Contact Us</Heading>                        
                     </Column>                   
                 </Row>
             </Container>

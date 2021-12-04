@@ -28,23 +28,27 @@ function NavbarLogged() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav static">
           <li className="nav-item li-element">
-            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+            <Link className="nav-link active" aria-current="page" to="/"><i className="fas fa-home"></i> Home</Link>
           </li>
         </ul>
         <ul className="navbar-nav">
 
+        <li className="nav-item li-element">
+            <Link className="nav-link active" aria-current="page" to="/search-by-country"><i className="fas fa-globe"></i> Search By Country</Link>
+          </li>
+
           <li className="nav-item li-element">
-            <Link className="nav-link active" aria-current="page" to="/search-by-city">Search By City</Link>
+            <Link className="nav-link active" aria-current="page" to="/search-by-city"><i className="fas fa-building"></i> Search By City</Link>
           </li>
 
           {!user ?
             <div className="d-flex justify-content-start">
               <li className="nav-item li-element">
-                <Link className="nav-link active" aria-current="page" to="/login">Login</Link>
+                <Link className="nav-link active" aria-current="page" to="/login"><i className="fas fa-sign-in-alt"></i> Login</Link>
               </li>
 
               <li className="nav-item li-element">
-                <Link className="nav-link active" aria-current="page" to="/register">Register</Link>
+              <Link className="nav-link active" aria-current="page" to="/register"><i className="fas fa-plus-square"></i> Register</Link>
               </li>
             </div>
             : null
@@ -54,7 +58,7 @@ function NavbarLogged() {
             <li className="nav-item dropdown dropdown-element li-element">
 
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profile
+              <i className="fas fa-user-circle"></i> Profile
               </a>
 
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -81,8 +85,6 @@ function NavbarLogged() {
         }
       </div>
     </div>
-
-
   )
 }
 

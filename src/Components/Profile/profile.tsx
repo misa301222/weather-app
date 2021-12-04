@@ -148,7 +148,7 @@ function Profile() {
 
     return (
         <div className="container profile-container container-data">
-            <h1 className="text-header">Profile <i className="fas fa-id-card"></i> </h1>
+            <h1 className="text-header yellowish">Profile <i className="fas fa-id-card"></i> </h1>
             <hr></hr>
             <Tabs
                 id="controlled-tab-example"

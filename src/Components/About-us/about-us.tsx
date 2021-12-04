@@ -14,7 +14,7 @@ function AboutUs() {
         <div className="container-data">
             <div className="container about-us-component">
                 <br />
-                <h1>About us <i className="fas fa-cloud-sun-rain"></i>
+                <h1 className="yellowish">About us <i className="fas fa-cloud-sun-rain"></i>
                 </h1>
                 <hr />
                 <br />

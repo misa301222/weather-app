@@ -6,6 +6,7 @@ import { useSpring, useTransition } from '@react-spring/core';
 import { animated } from '@react-spring/web';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const temperatureURL = "https://localhost:5001/api/Temperatures";
 const descriptionTemperatureURL = "https://localhost:5001/api/DescriptionTemperatures";
@@ -20,6 +21,7 @@ function Home() {
         cityName: '',
         countryId: 0
     });
+
     const [temperatures, setTemperatures] = useState([{
         cityId: 0,
         dateTemperature: '',
@@ -29,10 +31,22 @@ function Home() {
         windTemperature: 0,
         precipitationTemperature: 0
     }]);
+
     const [descriptionTemperatures, setDescriptionTemperatures] = useState([{
         descriptionTemperatureId: 0,
         descriptionTemperatureDescription: ''
     }]);
+
+    const [temperatureToday, setTemperatureToday] = useState({
+        cityId: 0,
+        dateTemperature: new Date(),
+        minTemperature: 0,
+        maxTemperature: 0,
+        descriptionTemperature: 0,
+        windTemperature: 0,
+        precipitationTemperature: 0
+    });
+
     const [{ size }] = useSpring(() => ({ size: 1 }));
     const [cities, setCities] = useState([{
         cityId: 0,
@@ -45,17 +59,22 @@ function Home() {
         let user = authService.getCurrentUser;
         if (user) {
             setUserName(user);
-            await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
-                console.log(response);
+        }
+        await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
+            console.log(response);
+            if (response.data.dataSet.defaultCity) {
                 getAllTemperaturesByCityId(response.data.dataSet.defaultCity);
                 getDefaultCityName(response.data.dataSet.defaultCity);
-            }).catch(err => {
-                console.log(err);
-            });
-        } else {
-            getAllTemperaturesByCityId(3);
-            getDefaultCityName(3);
-        }
+                getTemperatureByCityIdAndDateTemperature(response.data.dataSet.defaultCity);
+            } else {
+                getAllTemperaturesByCityId(3);
+                getDefaultCityName(3);
+                getTemperatureByCityIdAndDateTemperature(3);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+
     }
 
     const setNotLoggedMessageText = () => {
@@ -81,7 +100,7 @@ function Home() {
             console.log(response);
             setTemperatures(response.data);
         }).catch(err => {
-            console.log(err);            
+            console.log(err);
         });
 
     }
@@ -136,6 +155,21 @@ function Home() {
         });
     }
 
+    const getTemperatureByCityIdAndDateTemperature = async (cityId: number) => {
+        const dateToday = new Date().toLocaleDateString();
+        let dateTodayOrdered;
+        if (dateToday) {
+            dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
+        }
+
+        await axios.get(temperatureURL + '/GetTemperatureByCityIdAndDateTemperature/' + cityId + '/' + dateTodayOrdered).then(response => {
+            console.log(JSON.stringify(response));
+            setTemperatureToday(response.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     const handleOnChangeCity = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event);
         setSelectedCity(event.target.value);
@@ -152,11 +186,58 @@ function Home() {
             <div className="contenedor card shadow">
                 <div className="card-body">
                     <br></br>
-                    <h1 className="text-decoration-underline"> WeatherApp <i className="fas fa-laptop"></i></h1>
+                    <h1 className="text-decoration-underline pink-color"> WeatherApp <i className="fas fa-laptop"></i></h1>
                     <br></br>
                     <br></br>
 
-                    <img src={cloudImage} className="principal-image" alt="ImageCloud" />
+                    {
+                        temperatureToday.cityId > 0 ?
+                            <div className="container today-weather">
+                                <div className="container">
+                                    <h3 className="fst-italic yellowish">Today's Weather</h3>
+                                    <hr></hr>
+                                    <br></br>
+                                </div>
+
+                                <div className="row">
+
+                                    <div className="col-sm-2">
+                                    </div>
+
+                                    <div className="col">
+                                        <div className="card bg-light card-detail shadow card-date-today">
+                                            <div className="row g-0">
+                                                <div className="col-md-4">
+                                                    <img src={image(temperatureToday.descriptionTemperature)} className="img-fluid rounded-start" alt="..." />
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title purple fw-bold fst-italic">{temperatureToday.dateTemperature ? moment(new Date(temperatureToday.dateTemperature.toString().split('T')[0])).format('dddd')
+                                                            + ' ' + moment(new Date(temperatureToday.dateTemperature.toString())).format('MM/DD/YYYY') : null}</h5>
+                                                        <div className="row">
+                                                            <div className="col"> <h5> {temperatureToday.maxTemperature}&deg; </h5></div>
+                                                            <div className="col"> <h5> {temperatureToday.minTemperature}&deg; </h5> </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col"> <small className="text-muted fw-bold">Max</small> </div>
+                                                            <div className="col"> <small className="text-muted fw-bold">Min</small> </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-sm-2 d-flex align-items-end">
+                                        <Link to={{ pathname: `/weather-details/${temperatureToday.cityId}/${temperatureToday.dateTemperature}`, state: { Temperature: temperatureToday } }}>
+                                            <button type="button" className="btn btn-light btn-outline-dark">See details &#8594;</button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div> : <h3 className="text-danger">There was an error getting Today's date</h3>
+                    }
 
                     <br></br>
                     <br></br>
@@ -192,10 +273,18 @@ function Home() {
             </div>
 
             <div className="weather-contenedor">
-                <h1>Weather <i className="fas fa-cloud-moon-rain"></i></h1>
+                <h1 className="pink-color">Weather <i className="fas fa-cloud-moon-rain"></i></h1>
                 <hr></hr>
                 {!userName ? setNotLoggedMessageText() : null}
-                {city.cityName ? <h4>Weather of {city.cityName}</h4> : null}
+                {city.cityName ?
+                    <div className="container">
+                        <h4 className="yellowish">Weather of {city.cityName}</h4>
+                        <h5 className="fst-italic"><u>Next days...</u></h5>
+
+                        <br></br>
+                    </div>
+                    : null}
+
                 <br></br>
                 <div className="d-flex justify-content-evenly">
                     {
@@ -207,26 +296,27 @@ function Home() {
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col">
-                                                {temperature.dateTemperature ? temperature.dateTemperature.split('T')[0] : null}
+                                                <h5 className="fw-bold fst-italic purple">{temperature.dateTemperature ? moment(new Date(temperature.dateTemperature.split('T')[0])).format('dddd') + ' '
+                                                    + moment(new Date(temperature.dateTemperature)).format('MM/DD/YYYY') : null}</h5>
                                             </div>
                                         </div>
                                         <br></br>
 
                                         <div className="row">
                                             <div className="col">
-                                                {temperature.minTemperature}&deg;
+                                                <h5> {temperature.minTemperature}&deg; </h5>
                                             </div>
                                             <div className="col">
-                                                {temperature.maxTemperature}&deg;
+                                                <h5> {temperature.maxTemperature}&deg; </h5>
                                             </div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col">
-                                                <small className="text-muted">Min</small>
+                                                <small className="text-muted fw-bold">Min</small>
                                             </div>
                                             <div className="col">
-                                                <small className="text-muted">Max</small>
+                                                <small className="text-muted fw-bold">Max</small>
                                             </div>
                                         </div>
 
@@ -234,19 +324,19 @@ function Home() {
 
                                         <div className="row">
                                             <div className="col">
-                                                {temperature.precipitationTemperature}%
+                                                <h5> {temperature.precipitationTemperature}% </h5>
                                             </div>
                                             <div className="col">
-                                                {temperature.windTemperature}%
+                                                <h5> {temperature.windTemperature}% </h5>
                                             </div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col">
-                                                <small className="text-muted">Precipitation</small>
+                                                <small className="text-muted fw-bold">Precipitation</small>
                                             </div>
                                             <div className="col">
-                                                <small className="text-muted">Wind</small>
+                                                <small className="text-muted fw-bold">Wind</small>
                                             </div>
                                         </div>
 
