@@ -22,6 +22,8 @@ function Home() {
         countryId: 0
     });
 
+
+
     const [temperatures, setTemperatures] = useState([{
         cityId: 0,
         dateTemperature: '',
@@ -59,22 +61,30 @@ function Home() {
         let user = authService.getCurrentUser;
         if (user) {
             setUserName(user);
-        }
-        await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
-            console.log(response);
-            if (response.data.dataSet.defaultCity) {
-                getAllTemperaturesByCityId(response.data.dataSet.defaultCity);
-                getDefaultCityName(response.data.dataSet.defaultCity);
-                getTemperatureByCityIdAndDateTemperature(response.data.dataSet.defaultCity);
-            } else {
+            await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
+                console.log(response);
+                if (response.data.dataSet.defaultCity) {
+                    getAllTemperaturesByCityId(response.data.dataSet.defaultCity);
+                    getDefaultCityName(response.data.dataSet.defaultCity);
+                    getTemperatureByCityIdAndDateTemperature(response.data.dataSet.defaultCity);
+                } else {
+                    getAllTemperaturesByCityId(3);
+                    getDefaultCityName(3);
+                    getTemperatureByCityIdAndDateTemperature(3);
+                }
+            }).catch(err => {
+                console.log(err);
+            });
+        } else {
+            await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
+                console.log(response);
                 getAllTemperaturesByCityId(3);
                 getDefaultCityName(3);
                 getTemperatureByCityIdAndDateTemperature(3);
-            }
-        }).catch(err => {
-            console.log(err);
-        });
-
+            }).catch(err => {
+                console.log(err);
+            });
+        }
     }
 
     const setNotLoggedMessageText = () => {
@@ -155,6 +165,14 @@ function Home() {
         });
     }
 
+    const getCityByCityId = (cityId: number) => {
+        for (let i = 0; i < cities.length; i++) {
+            if (cities[i].cityId === cityId) {
+                return cities[i].cityName;
+            }
+        }
+    }
+
     const getTemperatureByCityIdAndDateTemperature = async (cityId: number) => {
         const dateToday = new Date().toLocaleDateString();
         let dateTodayOrdered;
@@ -194,7 +212,11 @@ function Home() {
                         temperatureToday.cityId > 0 ?
                             <div className="container today-weather">
                                 <div className="container">
-                                    <h3 className="fst-italic yellowish">Today's Weather</h3>
+                                    <h3 className="fst-italic yellowish">{getCityByCityId(temperatureToday.cityId)} Today's Weather</h3>
+                                    {!userName ?
+                                        <small className="text-danger fw-bold fts-italic">You're not logged in. Showing Mexicali weather.</small>
+                                        : null
+                                    }
                                     <hr></hr>
                                     <br></br>
                                 </div>

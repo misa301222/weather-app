@@ -11,7 +11,7 @@ function WeatherList(props: any) {
 
     const [nextFiveTemperatures, setNextFiveTemperatures] = useState([{
         cityId: 0,
-        dateTemperature: new Date,
+        dateTemperature: new Date(),
         minTemperature: 0,
         maxTemperature: 0,
         descriptionTemperature: 0,

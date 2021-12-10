@@ -1,0 +1,12 @@
+.link-style {
+    color: #ffd4a8;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+        color: #b3e6f5;
+        transition: 200ms ease-in;
+    }
+}

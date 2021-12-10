@@ -122,6 +122,22 @@ function AdminTools() {
                     </div>
                 </div>
 
+                <br></br>
+
+                <div className="container">
+                    <h3> News <i className="far fa-newspaper"></i></h3>
+                    <hr></hr>
+                    <div className="list-group shadow">
+                        <Link to="/add-news" className="list-group-item list-group-item-action text-start" aria-current="true">
+                            <div className="d-flex w-100 justify-content-between">
+                                <h5 className="mb-1">Add News</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p className="mb-1">Add New News</p>
+                        </Link>                        
+                    </div>
+                </div>
+
             </div>
         </div>
     )

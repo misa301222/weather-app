@@ -56,3 +56,16 @@ export const Heading = styled.p`
   margin-bottom: 40px;
   font-weight: bold;
 `;
+
+export const LinkFooter = styled.a`
+  color: #FFD4A8;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  
+  &:hover {
+      color: #B3E6F5;
+      transition: 200ms ease-in;
+  }
+`;

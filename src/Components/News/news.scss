@@ -1,0 +1,28 @@
+.news-component {
+    margin-top: 5em;
+
+    .container-news {
+        .element {   
+            border-style: ridge;         
+            border-width: 0.1em;
+            border-radius: 13px;
+            margin-top: 4em;
+            .thumbnail {
+                height: 15em;
+                border-radius: 13px;
+            }
+            .cat{
+                height: 20em;
+                width: 15em;
+                background-color: white;
+                border-radius: 13px;
+            }
+            .badge {
+                margin-right: 1em;
+            }
+            .date-text{
+                padding-right: 2em;
+            }
+        }
+    }
+}

@@ -33,7 +33,11 @@ function NavbarLogged() {
         </ul>
         <ul className="navbar-nav">
 
-        <li className="nav-item li-element">
+          <li className="nav-item li-element">
+            <Link className="nav-link active" aria-current="page" to="/news"><i className="far fa-newspaper"></i> News</Link>
+          </li>
+
+          <li className="nav-item li-element">
             <Link className="nav-link active" aria-current="page" to="/search-by-country"><i className="fas fa-globe"></i> Search By Country</Link>
           </li>
 
@@ -48,7 +52,7 @@ function NavbarLogged() {
               </li>
 
               <li className="nav-item li-element">
-              <Link className="nav-link active" aria-current="page" to="/register"><i className="fas fa-plus-square"></i> Register</Link>
+                <Link className="nav-link active" aria-current="page" to="/register"><i className="fas fa-plus-square"></i> Register</Link>
               </li>
             </div>
             : null
@@ -58,7 +62,7 @@ function NavbarLogged() {
             <li className="nav-item dropdown dropdown-element li-element">
 
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className="fas fa-user-circle"></i> Profile
+                <i className="fas fa-user-circle"></i> Profile
               </a>
 
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -76,11 +80,16 @@ function NavbarLogged() {
 
             </li> : null
           }
+
+          <li className="nav-item li-element">
+            <Link className="nav-link active" aria-current="page" to="/chart"><i className="fas fa-history"></i> Historic Weather</Link>
+          </li>
+
         </ul>
         {
           user ?
             <ul className="navbar-nav right-navbar">
-              <li className="nav-item text-white li-element"><Link to="/profile" className="text-decoration-none"> Current Logged in as: {user}</Link></li>
+              <li className="nav-item text-white li-element"><Link to="/profile" className="text-decoration-none fw-bold"> {user}</Link></li>
             </ul> : null
         }
       </div>

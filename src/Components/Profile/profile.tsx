@@ -22,6 +22,8 @@ function Profile() {
         ImageURL: ''
     });
 
+    const [isSave, setIsSave] = useState(true);
+
     const [user, setUser] = useState({
         FullName: '',
         Email: '',
@@ -51,6 +53,7 @@ function Profile() {
             console.log(response);
             setImageUser(prev => ({ ...prev, ImageURL: response.data.imageURL }));
             setImageUser(prev => ({ ...prev, Email: response.data.email }));
+            setIsSave(false);
         }).catch(err => {
             console.log(err);
         });
@@ -90,6 +93,7 @@ function Profile() {
                 showConfirmButton: false,
                 timer: 1100
             })
+            setIsSave(false);
         }).catch(err => {
             console.log(err);
         })
@@ -154,7 +158,7 @@ function Profile() {
                 id="controlled-tab-example"
                 activeKey={key}
                 onSelect={(k) => setKey(k)}
-                transition={false}
+                transition={true}
                 className="mb-3">
                 <Tab eventKey="profile" title="Profile">
                     <div className="container container-tab shadow">
@@ -211,7 +215,7 @@ function Profile() {
                                 </animated.div>
                             </div>
                             <div className="col">
-                                {imageUser.ImageURL ?
+                                {!isSave ?
                                     <form className="form-profile text-start" onSubmit={handleSubmitImageURLEventEdit}>
                                         <div className="mb-3">
                                             <label htmlFor="inputImageURL" className="form-label">Image URL</label>

@@ -1,11 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import './FooterStyles.scss';
 import {
     Box,
     Container,
     Row,
     Column,
-    FooterLink,
     Heading,
 } from "./FooterStyles";
 
@@ -17,23 +16,26 @@ function Footer() {
                 color: "#FFD4A8",
                 textAlign: "center",
                 marginTop: "-50px",
-                marginBottom: '0.7em'                
+                marginBottom: '0.7em'
             }}>
-                <u> Weather App </u><i className="fas fa-laptop"></i> 
+                <u> Weather App </u><i className="fas fa-laptop"></i>
             </h1>
             <Container>
                 <Row>
                     <Column>
                         <Heading>About Us</Heading>
-                        <FooterLink href="/about-us">About</FooterLink>
+                        <Link className="link-style" to="/about-us">About</Link>
                     </Column>
                     <Column>
                         <Heading>Services</Heading>
-                        <FooterLink href="/send-job-application">Send Job Application</FooterLink>                        
+                        <Link className="link-style" to="/send-job-application">Send Job Application</Link>
+                        <Link className="link-style" to="/search-by-country">Search by Country</Link>
+                        <Link className="link-style" to="/search-by-city">Search by City</Link>
                     </Column>
                     <Column>
-                        <Heading>Contact Us</Heading>                        
-                    </Column>                   
+                        <Heading>About this App</Heading>
+                        <Link className="link-style" to="/about-this-app">About this App</Link>
+                    </Column>
                 </Row>
             </Container>
         </Box>

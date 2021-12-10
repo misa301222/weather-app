@@ -3,13 +3,14 @@ import CatImage from '../../resources/images/Cat.png';
 import axios from 'axios';
 import '././send-job-application.scss';
 import Swal from "sweetalert2";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ReactCanvasConfetti from "react-canvas-confetti";
 
 const desiredPositionURL = "https://localhost:5001/api/DesiredPositions";
 const jobApplicationsURL = "https://localhost:5001/api/JobApplications";
 
 function SendJobApplication() {
+    const history = useHistory();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isApplicationAlreadySent, setIsApplicationAlreadySent] = useState(false);
@@ -140,6 +141,9 @@ function SendJobApplication() {
                 icon: 'success',
                 title: 'Application Sent Succesfully, please wait in this section until you have a response :)',
                 showConfirmButton: true,
+            }).then(function () {
+                history.push('/send-job-application');
+                history.go(0);
             });
         }).catch(err => {
             console.log(err);
@@ -239,6 +243,34 @@ function SendJobApplication() {
 
     //Confetti END
 
+    const handleCancelApplication = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will have to send another application.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel current application'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const user = localStorage.getItem('user');
+                axios.delete(jobApplicationsURL + '/' + user).then(response => {
+                    Swal.fire(
+                        'Deleted!',
+                        'You application was deleted succesfully!',
+                        'success'
+                    ).then(function () {
+                        history.push('/send-job-application');
+                        history.go(0);
+                    })
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        });
+    }
+
     useEffect(() => {
         setLoggedInUserData();
         getAllDesiredPositions();
@@ -325,7 +357,11 @@ function SendJobApplication() {
                     <div className="container">
                         {
                             isApplicationAlreadySent && jobApplicationReadOnly.applicationStatus === 1 ?
-                                <h5 className="text-primary text-center">You already sent an application. Please wait patiently for a response. :)</h5>
+                                <div className='header d-flex flex-column align-items-center mb-3'>
+                                    <h5 className="text-primary text-center">You already sent an application. Please wait patiently for a response. :)</h5>
+                                    <button type="button" className='btn btn-danger' onClick={handleCancelApplication}>Cancel Application</button>
+                                    <small className='text-muted fw-bold fst-italic'>If you cancel this application, you need to fill the form again.</small>
+                                </div>
                                 :
                                 isApplicationAlreadySent && jobApplicationReadOnly.applicationStatus === 2 ?
                                     <div className="message">

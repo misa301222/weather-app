@@ -51,7 +51,7 @@ function CityDetails() {
             dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
         }
 
-        await axios.get(temperatureURL + '/GetAllTemperaturesFromDateToEnd/' + cityId + '/' + dateTodayOrdered).then(response => {
+        await axios.get(temperatureURL + '/GetTemperatureFromDateToEndLimitNinety/' + cityId + '/' + dateTodayOrdered).then(response => {
             console.log(response);
             setTemperatures(response.data);
         }).catch(err => {
