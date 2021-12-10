@@ -6,6 +6,7 @@ import { useSpring, useTransition } from '@react-spring/core';
 import { animated } from '@react-spring/web';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const temperatureURL = "https://localhost:5001/api/Temperatures";
 const descriptionTemperatureURL = "https://localhost:5001/api/DescriptionTemperatures";
@@ -20,6 +21,9 @@ function Home() {
         cityName: '',
         countryId: 0
     });
+
+
+
     const [temperatures, setTemperatures] = useState([{
         cityId: 0,
         dateTemperature: '',
@@ -29,10 +33,22 @@ function Home() {
         windTemperature: 0,
         precipitationTemperature: 0
     }]);
+
     const [descriptionTemperatures, setDescriptionTemperatures] = useState([{
         descriptionTemperatureId: 0,
         descriptionTemperatureDescription: ''
     }]);
+
+    const [temperatureToday, setTemperatureToday] = useState({
+        cityId: 0,
+        dateTemperature: new Date(),
+        minTemperature: 0,
+        maxTemperature: 0,
+        descriptionTemperature: 0,
+        windTemperature: 0,
+        precipitationTemperature: 0
+    });
+
     const [{ size }] = useSpring(() => ({ size: 1 }));
     const [cities, setCities] = useState([{
         cityId: 0,
@@ -47,14 +63,27 @@ function Home() {
             setUserName(user);
             await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
                 console.log(response);
-                getAllTemperaturesByCityId(response.data.dataSet.defaultCity);
-                getDefaultCityName(response.data.dataSet.defaultCity);
+                if (response.data.dataSet.defaultCity) {
+                    getAllTemperaturesByCityId(response.data.dataSet.defaultCity);
+                    getDefaultCityName(response.data.dataSet.defaultCity);
+                    getTemperatureByCityIdAndDateTemperature(response.data.dataSet.defaultCity);
+                } else {
+                    getAllTemperaturesByCityId(3);
+                    getDefaultCityName(3);
+                    getTemperatureByCityIdAndDateTemperature(3);
+                }
             }).catch(err => {
                 console.log(err);
             });
         } else {
-            getAllTemperaturesByCityId(3);
-            getDefaultCityName(3);
+            await axios.get(userURL + '/GetCurrentUser/' + user).then(response => {
+                console.log(response);
+                getAllTemperaturesByCityId(3);
+                getDefaultCityName(3);
+                getTemperatureByCityIdAndDateTemperature(3);
+            }).catch(err => {
+                console.log(err);
+            });
         }
     }
 
@@ -72,12 +101,18 @@ function Home() {
     }
 
     const getAllTemperaturesByCityId = async (cityId: number) => {
-        await axios.get(temperatureURL + '/GetTemperatureByCityId/' + cityId).then(response => {
+        const dateToday = new Date().toLocaleDateString();
+        let dateTodayOrdered;
+        if (dateToday) {
+            dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
+        }
+        await axios.get(temperatureURL + '/GetTemperatureByCityIdAndDateTemperatureNextFive/' + cityId + '/' + dateTodayOrdered).then(response => {
             console.log(response);
             setTemperatures(response.data);
         }).catch(err => {
             console.log(err);
         });
+
     }
 
     const getDescriptionTemperatureById = async () => {
@@ -130,6 +165,29 @@ function Home() {
         });
     }
 
+    const getCityByCityId = (cityId: number) => {
+        for (let i = 0; i < cities.length; i++) {
+            if (cities[i].cityId === cityId) {
+                return cities[i].cityName;
+            }
+        }
+    }
+
+    const getTemperatureByCityIdAndDateTemperature = async (cityId: number) => {
+        const dateToday = new Date().toLocaleDateString();
+        let dateTodayOrdered;
+        if (dateToday) {
+            dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
+        }
+
+        await axios.get(temperatureURL + '/GetTemperatureByCityIdAndDateTemperature/' + cityId + '/' + dateTodayOrdered).then(response => {
+            console.log(JSON.stringify(response));
+            setTemperatureToday(response.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     const handleOnChangeCity = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event);
         setSelectedCity(event.target.value);
@@ -142,67 +200,168 @@ function Home() {
     }, []);
 
     return (
-        <div className="container home">
-            <div className="contenedor">
-                <br></br>
-                <h1 className="text-decoration-underline"> Weather app <i className="fas fa-laptop"></i></h1>
-                <br></br>
-                <br></br>
+        <div className="container home container-data">
+            <div className="contenedor card shadow">
+                <div className="card-body">
+                    <br></br>
+                    <h1 className="text-decoration-underline pink-color"> WeatherApp <i className="fas fa-laptop"></i></h1>
+                    <br></br>
+                    <br></br>
 
-                <img src={cloudImage} className="principal-image" alt="ImageCloud" />
+                    {
+                        temperatureToday.cityId > 0 ?
+                            <div className="container today-weather">
+                                <div className="container">
+                                    <h3 className="fst-italic yellowish">{getCityByCityId(temperatureToday.cityId)} Today's Weather</h3>
+                                    {!userName ?
+                                        <small className="text-danger fw-bold fts-italic">You're not logged in. Showing Mexicali weather.</small>
+                                        : null
+                                    }
+                                    <hr></hr>
+                                    <br></br>
+                                </div>
 
-                <br></br>
-                <br></br>
-                <br></br>
+                                <div className="row">
 
-                { /* TODO ARREGLAR IMAGENES CUANDO SE ESCRIBE ACA */}
-                <div className="searcher">
-                    <h1> <i className="fas fa-building"></i> </h1>
-                    <form className="row form-search-city p-3">
-                        <div className="col-sm-4">
-                            <label htmlFor="inputCityId" className="col col-form-label fw-bold">Search City:</label>
-                        </div>
-                        <div className="col-sm-6 ">
-                            <input className="form-control" list="datalistOptions" id="inputCityId" placeholder="Select A City" onChange={handleOnChangeCity} />
-                            <datalist id="datalistOptions">
-                                <option value={0}>Open this select menu</option>
-                                {
-                                    cities.map(city => (
-                                        <option key={city.cityId} value={city.cityId}>{city.cityName}</option>
-                                    ))
-                                }
-                            </datalist>
-                        </div>
-                        <div className="col">
-                            <Link to={{ pathname: `/city-details/${selectedCity}`, state: { SelectedCity: selectedCity } }}>
-                                <button type="button" className="btn btn-light btn-outline-dark"><i className="fas fa-search"></i></button>
-                            </Link>
-                        </div>
-                    </form>
+                                    <div className="col-sm-2">
+                                    </div>
+
+                                    <div className="col">
+                                        <div className="card bg-light card-detail shadow card-date-today">
+                                            <div className="row g-0">
+                                                <div className="col-md-4">
+                                                    <img src={image(temperatureToday.descriptionTemperature)} className="img-fluid rounded-start" alt="..." />
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title purple fw-bold fst-italic">{temperatureToday.dateTemperature ? moment(new Date(temperatureToday.dateTemperature.toString().split('T')[0])).format('dddd')
+                                                            + ' ' + moment(new Date(temperatureToday.dateTemperature.toString())).format('MM/DD/YYYY') : null}</h5>
+                                                        <div className="row">
+                                                            <div className="col"> <h5> {temperatureToday.maxTemperature}&deg; </h5></div>
+                                                            <div className="col"> <h5> {temperatureToday.minTemperature}&deg; </h5> </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col"> <small className="text-muted fw-bold">Max</small> </div>
+                                                            <div className="col"> <small className="text-muted fw-bold">Min</small> </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-sm-2 d-flex align-items-end">
+                                        <Link to={{ pathname: `/weather-details/${temperatureToday.cityId}/${temperatureToday.dateTemperature}`, state: { Temperature: temperatureToday } }}>
+                                            <button type="button" className="btn btn-light btn-outline-dark">See details &#8594;</button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div> : <h3 className="text-danger">There was an error getting Today's date</h3>
+                    }
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                    { /* TODO ARREGLAR IMAGENES CUANDO SE ESCRIBE ACA */}
+                    <div className="searcher">
+                        <h1> <i className="fas fa-building"></i> </h1>
+                        <form className="row form-search-city p-3">
+                            <div className="col-sm-4">
+                                <label htmlFor="inputCityId" className="col col-form-label fw-bold">Search City:</label>
+                            </div>
+                            <div className="col-sm-6 ">
+                                <input className="form-control" list="datalistOptions" id="inputCityId" placeholder="Select A City" onChange={handleOnChangeCity} />
+                                <datalist id="datalistOptions">
+                                    <option value={0}>Open this select menu</option>
+                                    {
+                                        cities.map(city => (
+                                            <option key={city.cityId} value={city.cityId}>{city.cityName}</option>
+                                        ))
+                                    }
+                                </datalist>
+                            </div>
+                            <div className="col">
+                                <Link to={{ pathname: `/city-details/${selectedCity}`, state: { SelectedCity: selectedCity } }}>
+                                    <button type="button" className="btn btn-light btn-outline-dark"><i className="fas fa-search"></i></button>
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
 
             <div className="weather-contenedor">
-                <h1>Weather <i className="fas fa-cloud-moon-rain"></i></h1>
+                <h1 className="pink-color">Weather <i className="fas fa-cloud-moon-rain"></i></h1>
                 <hr></hr>
                 {!userName ? setNotLoggedMessageText() : null}
-                {city.cityName ? <h4>Weather of {city.cityName}</h4> : null}
+                {city.cityName ?
+                    <div className="container">
+                        <h4 className="yellowish">Weather of {city.cityName}</h4>
+                        <h5 className="fst-italic"><u>Next days...</u></h5>
+
+                        <br></br>
+                    </div>
+                    : null}
+
                 <br></br>
-                <div className="card-group">
+                <div className="d-flex justify-content-evenly">
                     {
-                        temperatures.length > 0 ?
+                        temperatures[0].cityId > 0 ?
                             temperatures.slice(0, 3).map((temperature, index) => (
                                 <div key={index} className="card weather-card shadow">
                                     { /* style={{ transform: size.to(s => `scale(${s})`) }} */}
                                     <img src={image(temperature.descriptionTemperature)} className="weather-image shadow-sm card-img-top" alt="WeatherPhoto" />
                                     <div className="card-body">
-                                        <h5 className="card-text">{temperature.dateTemperature.split('T')[0]}</h5>
-                                        <h5 className="card-text">{text(temperature.descriptionTemperature)}</h5>
-                                        <h5 className="card-text">Max: {temperature.maxTemperature}&deg;</h5>
-                                        <h5 className="card-text">Min: {temperature.minTemperature}&deg;</h5>
-                                        <h5 className="card-text">Precipitation: {temperature.precipitationTemperature}%</h5>
-                                        <h5 className="card-text">Wind: {temperature.windTemperature} km/s</h5>
-                                        <div className="mb-3 text-center"></div>
+                                        <div className="row">
+                                            <div className="col">
+                                                <h5 className="fw-bold fst-italic purple">{temperature.dateTemperature ? moment(new Date(temperature.dateTemperature.split('T')[0])).format('dddd') + ' '
+                                                    + moment(new Date(temperature.dateTemperature)).format('MM/DD/YYYY') : null}</h5>
+                                            </div>
+                                        </div>
+                                        <br></br>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <h5> {temperature.minTemperature}&deg; </h5>
+                                            </div>
+                                            <div className="col">
+                                                <h5> {temperature.maxTemperature}&deg; </h5>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <small className="text-muted fw-bold">Min</small>
+                                            </div>
+                                            <div className="col">
+                                                <small className="text-muted fw-bold">Max</small>
+                                            </div>
+                                        </div>
+
+                                        <br></br>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <h5> {temperature.precipitationTemperature}% </h5>
+                                            </div>
+                                            <div className="col">
+                                                <h5> {temperature.windTemperature}% </h5>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <small className="text-muted fw-bold">Precipitation</small>
+                                            </div>
+                                            <div className="col">
+                                                <small className="text-muted fw-bold">Wind</small>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div className="card-footer">
                                         <Link to={{ pathname: `/weather-details/${temperature.cityId}/${temperature.dateTemperature}`, state: { Temperature: temperature } }}>

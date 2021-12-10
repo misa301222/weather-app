@@ -1,0 +1,166 @@
+$blue: #0d6efd;
+$red: #dc3545;
+$yellow: #ffc107;
+$cyan: rgb(151, 255, 255);
+.news-details-component {
+    .news-info {
+        margin-top: 5em;
+        border-style: ridge;
+        border-width: 0.1em;
+        border-radius: 13px;
+        .badge {
+            margin-right: 1em;
+        }
+
+        .body {
+            .body-image {
+                width: 50em;
+                border-radius: 13px;
+                margin: 0 auto;
+            }
+
+            .body-info {
+                margin-top: 3em;
+            }
+
+            .not-found {
+                width: 15em;
+                background-color: white;
+                border-radius: 13px;
+            }
+        }
+    }
+    .reaction-bar {
+        width: 20em;
+        background-color: white;
+        border-style: solid;
+        border-width: 0.1em;
+        border-color: black;
+        border-radius: 13px;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+
+        .reaction-element {
+            border-radius: 13px;
+        }
+
+        #btnLike:hover {
+            background-color: $blue;
+            color: black;
+        }
+
+        $timeUnselect: 0.7s;
+
+        .btnLike-selected {
+            background-color: $blue;
+            color: black;
+            animation: undefined-easeOutElastic 1.3s;
+        }
+
+        .btnLike-not-selected {
+            color: black;
+            margin-top: 0em;
+            animation: undefined-easeOutBounce $timeUnselect;
+        }
+
+        .btnWow-not-selected {
+            color: black;
+            margin-top: 0em;
+            animation: undefined-easeOutBounce $timeUnselect;
+        }
+
+        .btnSad-not-selected {
+            color: black;
+            margin-top: 0em;
+            animation: undefined-easeOutBounce $timeUnselect;
+        }
+
+        .btnAngry-not-selected {
+            color: black;
+            margin-top: 0em;
+            animation: undefined-easeOutBounce $timeUnselect;
+        }
+
+        @keyframes undefined-easeOutElastic {
+            0% {
+                transform: translateY(0%);
+            }
+
+            16% {
+                transform: translateY(-132.27%);
+            }
+
+            28% {
+                transform: translateY(-86.88%);
+            }
+
+            44% {
+                transform: translateY(-104.63%);
+            }
+
+            59% {
+                transform: translateY(-98.36%) rotateY(180deg);
+            }
+
+            73% {
+                transform: translateY(-100.58%);
+            }
+
+            88% {
+                transform: translateY(-99.8%);
+            }
+
+            100% {
+                transform: translateY(0%);
+            }
+        }
+
+        @keyframes undefined-easeOutBounce {
+            0% {
+                transform: translateY(0%);
+            }
+
+            50% {
+                transform: translateY(50.89%);
+            }
+
+            100% {
+                transform: translateY(0%);
+            }
+        
+        }
+
+        #btnWow:hover {
+            background-color: $yellow;
+            color: black;
+        }
+
+        .btnWow-selected {
+            background-color: $yellow;
+            color: black;
+            animation: undefined-easeOutElastic 1.3s;
+        }
+
+        #btnSad:hover {
+            background-color: $cyan;
+            color: black;
+        }
+
+        .btnSad-selected {
+            background-color: $cyan;
+            color: black;
+            animation: undefined-easeOutElastic 1.3s;
+        }
+
+        #btnAngry:hover {
+            background-color: $red;
+            color: black;
+        }
+
+        .btnAngry-selected {
+            background-color: $red;
+            color: black;
+            animation: undefined-easeOutElastic 1.3s;
+        }
+    }
+}

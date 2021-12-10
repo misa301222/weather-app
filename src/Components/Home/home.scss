@@ -1,12 +1,15 @@
 .home {
     margin-top: 3em;
-    //background-color: #2e2e2e;
-    //border-radius: 13px;
 
     .contenedor {
-        background-color: #2e2e2e;
         border-radius: 13px;
         padding-bottom: 5em;
+    }
+
+    .today-weather{
+        .card-date-today{
+            
+        }
     }
 
     .weather-contenedor {
@@ -26,18 +29,9 @@
         }
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: wheat;
-    }
-
     .principal-image {
-        width: 60em;
-        border-radius: 13px;
+        //width: 40em;
+        //border-radius: 13px;
     }
 
     .searcher {
@@ -59,14 +53,15 @@
 
     .card-group {
         //width: 50em;
-        margin: 0 auto;
+        //margin: 0 auto;
+        //width: 50em;
     }
 
     .weather-card {
-        width: 10em;
+        //width: 10em;
 
         .weather-image {
-            width: 18em;
+            //width: 18em;
             height: 10em;
             margin: 0 auto;
         }

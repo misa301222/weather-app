@@ -1,11 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import './FooterStyles.scss';
 import {
     Box,
     Container,
     Row,
     Column,
-    FooterLink,
     Heading,
 } from "./FooterStyles";
 
@@ -13,33 +12,30 @@ function Footer() {
 
     return (
         <Box className="bg-dark">
-            <h1 style={{
-                color: "wheat",
+            <h1 className="yellowish" style={{
+                color: "#FFD4A8",
                 textAlign: "center",
-                marginTop: "-50px"
+                marginTop: "-50px",
+                marginBottom: '0.7em'
             }}>
-                Weather App &#x2764;
+                <u> Weather App </u><i className="fas fa-laptop"></i>
             </h1>
             <Container>
                 <Row>
                     <Column>
                         <Heading>About Us</Heading>
-                        <FooterLink href="/about-us">About</FooterLink>
+                        <Link className="link-style" to="/about-us">About</Link>
                     </Column>
                     <Column>
                         <Heading>Services</Heading>
-                        <FooterLink href="#">Writing</FooterLink>
-                        <FooterLink href="#">Internships</FooterLink>
-                        <FooterLink href="#">Coding</FooterLink>
-                        <FooterLink href="#">Teaching</FooterLink>
+                        <Link className="link-style" to="/send-job-application">Send Job Application</Link>
+                        <Link className="link-style" to="/search-by-country">Search by Country</Link>
+                        <Link className="link-style" to="/search-by-city">Search by City</Link>
                     </Column>
                     <Column>
-                        <Heading>Contact Us</Heading>
-                        <FooterLink href="#">Uttar Pradesh</FooterLink>
-                        <FooterLink href="#">Ahemdabad</FooterLink>
-                        <FooterLink href="#">Indore</FooterLink>
-                        <FooterLink href="#">Mumbai</FooterLink>
-                    </Column>                   
+                        <Heading>About this App</Heading>
+                        <Link className="link-style" to="/about-this-app">About this App</Link>
+                    </Column>
                 </Row>
             </Container>
         </Box>

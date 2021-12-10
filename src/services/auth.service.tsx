@@ -24,8 +24,19 @@ class AuthService {
                     case 1:
                         if (response.data.dataSet.token) {
                             localStorage.setItem("user", response.data.dataSet.email);
+                            localStorage.setItem('fullName', response.data.dataSet.fullName);
                             localStorage.setItem('token', response.data.dataSet.token);
                             localStorage.setItem("roles", response.data.dataSet.roles);
+                            switch (response.data.dataSet.defaultTheme) {
+                                case 0:
+                                    localStorage.setItem('theme', 'light');
+                                    break;
+
+                                case 1:
+                                    localStorage.setItem('theme', 'dark');
+                                    break;
+                            }
+
                             console.log('Logged Succesfully as: ' + response.data.dataSet.email);
                             console.log('Roles: ' + response.data.dataSet.roles);
                         }

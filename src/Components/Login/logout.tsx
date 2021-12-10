@@ -8,7 +8,7 @@ function Logout() {
     const clearData = () => {
         localStorage.removeItem("user");
         localStorage.removeItem('roles');
-
+        localStorage.removeItem('theme');
         
         Swal.fire({
             position: 'top-end',

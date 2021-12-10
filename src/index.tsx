@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/js/dist/dropdown';
 import '@fortawesome/fontawesome-free/js/all.js';
+import "react-datepicker/dist/react-datepicker.css";
 //import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

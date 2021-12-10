@@ -1,0 +1,14 @@
+.country-details-component {
+    margin-top: 5em;
+
+    .container-cities {
+        height: 40em;
+        overflow-y: auto;
+    }
+
+    .error-div {
+        .error-image {
+            width: 15em;
+        }
+    }
+}

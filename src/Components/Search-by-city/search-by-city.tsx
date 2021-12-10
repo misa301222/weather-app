@@ -32,13 +32,15 @@ function SearchByCity() {
 
 
     return (
-        <div className="container search-by-city">
+        <div className="container search-by-city-component container-data">
+
+            <h1 className="header yellowish">
+                <i className="fas fa-building"></i> Please select a City:
+            </h1>
+            <hr></hr>
+            <br></br>
+
             <div className="searcher">
-
-                <h1 className="header">
-                    Please select a city:
-                </h1>
-
                 <form className="row shadow p-3">
                     <div className="col-sm-4">
                         <label htmlFor="inputCityId" className="col col-form-label fw-bold">Search City:</label>

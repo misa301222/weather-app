@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import '././city-details.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const temperatureURL = "https://localhost:5001/api/Temperatures";
 const citiesURL = "https://localhost:5001/api/Cities";
@@ -14,8 +15,6 @@ interface CustomState {
 }
 
 function CityDetails() {
-
-    //const { state } = useLocation();
     const { state } = useLocation<CustomState>();
 
     const [city, setCity] = useState({
@@ -46,7 +45,13 @@ function CityDetails() {
     });
 
     const getAllTemperaturesByCityId = async (cityId: number) => {
-        await axios.get(temperatureURL + '/GetTemperatureByCityId/' + cityId).then(response => {
+        const dateToday = new Date().toLocaleDateString();
+        let dateTodayOrdered;
+        if (dateToday) {
+            dateTodayOrdered = dateToday.split('/')[2] + '-' + dateToday.split('/')[0] + '-' + dateToday.split('/')[1];
+        }
+
+        await axios.get(temperatureURL + '/GetTemperatureFromDateToEndLimitNinety/' + cityId + '/' + dateTodayOrdered).then(response => {
             console.log(response);
             setTemperatures(response.data);
         }).catch(err => {
@@ -56,7 +61,6 @@ function CityDetails() {
 
     const getCityNameByCityId = async (cityId: number) => {
         await axios.get(citiesURL + '/' + cityId).then(response => {
-            //console.log(response.data);
             setCity(response.data);
         }).catch(err => {
             console.log(err);
@@ -101,15 +105,15 @@ function CityDetails() {
     }, [state])
 
     return (
-        <div className="container city-details">
+        <div className="container city-details-component container-data">
             <br></br>
-            <h2 className="">
+            <h2 className="fw-bold pink-color">
                 {city.cityName} <i className="fas fa-sun"></i>
             </h2>
 
             <br></br>
 
-            <div className="searcher">                
+            <div className="searcher">
                 <form className="row shadow p-3">
                     <div className="col-sm-4">
                         <label htmlFor="inputCityId" className="col col-form-label fw-bold"><i className="fas fa-building"></i> Search City:</label>
@@ -131,45 +135,38 @@ function CityDetails() {
                         </Link>
                     </div>
                 </form>
+                <br></br>
+                <hr></hr>
             </div>
 
             <div className="all-cities">
                 {
-
                     temperatures.length ?
                         temperatures.map((city, i) => (
                             <div className="container city-element" key={i}>
                                 <div className="row">
                                     <div className="col">
-                                        <div className="card mb-3 bg-light card-detail shadow">
-                                            <img src={image(city.descriptionTemperature)} className="card-img-top" alt="..." />
-                                            <div className="card-body">
-                                                <h5 className="card-title">{city.dateTemperature.split('T')[0]}</h5>
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.maxTemperature}&deg;</h5>
-                                                        <label className="card-text"><small className="text-muted">Max</small></label>
-                                                    </div>
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.minTemperature}&deg;</h5>
-                                                        <label className="card-text"><small className="text-muted">Min</small></label>
+                                        <div className="card bg-light card-detail shadow">
+                                            <div className="row g-0">
+                                                <div className="col-md-4">
+                                                    <img src={image(city.descriptionTemperature)} className="img-fluid rounded-start" alt="..." />
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title purple fw-bold fst-italic">{city.dateTemperature ?
+                                                            moment(new Date(city.dateTemperature)).format('dddd') + ' ' +
+                                                            moment(new Date(city.dateTemperature)).format('MM/DD/YYYY') : null}</h5>
+                                                        <div className="row">
+                                                            <div className="col"> <h5> {city.maxTemperature}&deg; </h5></div>
+                                                            <div className="col"> <h5> {city.minTemperature}&deg; </h5></div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col"> <small className="text-muted fw-bold">Max</small> </div>
+                                                            <div className="col"> <small className="text-muted fw-bold">Min</small> </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-
-                                                <br></br>
-
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.precipitationTemperature}%</h5>
-                                                        <label className="card-text"><small className="text-muted">Precipitation</small></label>
-                                                    </div>
-
-                                                    <div className="col">
-                                                        <h5 className="card-text">{city.windTemperature} km/s</h5>
-                                                        <label className="card-text"><small className="text-muted">Wind</small></label>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
 
@@ -194,20 +191,8 @@ function CityDetails() {
                             <img src="/images/Error.png" className="error-image" />
                         </div>
                 }
-
             </div>
 
-
-            {/*
-            <div className="card mb-3 bg-light">
-                <img src="..." className="card-img-top" alt="..." />
-                <div className ="card-body">
-                <h5 className ="card-title">Card title</h5>
-                <p className ="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.This content is a little bit longer.</p>
-                <p className ="card-text"><small className ="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>*/
-            }
         </div>)
 }
 

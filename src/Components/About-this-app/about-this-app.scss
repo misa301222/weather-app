@@ -1,0 +1,98 @@
+.about-this-app-component {
+    margin-top: 5em;
+
+    .thumbnail-logo {
+        width: 13em;
+        transform: scale(1);
+        transition: 0.2s ease-in;
+    }
+
+    .fire-row {
+        margin-top: 4em;
+    }
+
+    .exting {
+        font-size: 3.5em;
+        transition: color 0.2s ease-in;
+    }
+
+    .exting:hover {
+        color: rgb(199, 58, 58) !important;
+    }
+
+    .thumbnail-logo:hover {
+        transform: scale(0.8);
+        transition: 0.2s ease-in;
+    }
+
+    .thumbnail-logo[data-dance="1"] {
+        animation: onHoverAnimation 3s;        
+    }
+
+    @keyframes onHoverAnimation {
+        25% {
+            transform: scale(0.7) rotateY(30deg) translateX(500%);
+        }
+
+        35% {
+            transform: scale(1) rotateY(180deg);
+        }
+
+        50% {
+            transform: scale(0.5) rotateY(60deg) translateX(-500%);
+        }
+
+        65% {
+            transform: scale(1) rotateY(0deg);
+        }
+
+        75% {
+            transform: rotateX(180deg);
+        }
+
+        80% {
+            transform: rotate(45deg) rotateX(180deg);
+        }
+
+        85% {
+            transform: rotate(-45deg) scale(1.3);
+        }
+
+        90% {
+            transform: rotate(45deg) scale(0.9);
+        }
+
+        95% {
+            transform: rotate(-45deg) scale(1.3);
+        }
+
+        100% {
+            transform: rotate(0deg) scale(1);
+        }
+    }
+
+    .header-features {
+        margin-top: 10em;
+    }
+
+    .row-content {
+        margin-top: 8em;
+    }
+
+    .entity-logo {
+        width: 20em;
+        border-radius: 13px;
+        transition: 0.3s ease-in;
+    }
+
+    .entity-logo:hover {
+        //animation: onHoverAnimation 1.2s;
+        transform: scale(0.8);
+        transition: 0.3s ease-in;
+    }
+
+    .searcher {
+        height: 17em;
+        border-radius: 13px;
+    }
+}

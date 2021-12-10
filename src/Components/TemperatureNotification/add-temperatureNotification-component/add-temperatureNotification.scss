@@ -1,0 +1,10 @@
+.add-temperature-component {
+    margin-top: 5em;
+
+    .card-temperatureNotification {
+        margin: 0 auto;
+        #textAreaDescription{
+            resize: none;
+        }
+    }
+}

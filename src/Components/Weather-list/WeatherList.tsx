@@ -2,18 +2,16 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import '././WeatherList.scss';
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 
 const temperatureURL = "https://localhost:5001/api/Temperatures";
 const descriptionTemperatureURL = "https://localhost:5001/api/DescriptionTemperatures";
-//const citiesURL = "https://localhost:5001/api/Cities";
 
 function WeatherList(props: any) {
 
-    //const [data, setData] = useState({});
     const [nextFiveTemperatures, setNextFiveTemperatures] = useState([{
         cityId: 0,
-        dateTemperature: new Date,
+        dateTemperature: new Date(),
         minTemperature: 0,
         maxTemperature: 0,
         descriptionTemperature: 0,
@@ -24,7 +22,6 @@ function WeatherList(props: any) {
         descriptionTemperatureId: 0,
         descriptionTemperatureDescription: ''
     }]);
-    //const [city, setCity] = useState({});
 
     const GetTemperatureByCityIdAndDateTemperatureNextFive = async (cityId: number, dateTemperature: Date) => {
         await axios.get(temperatureURL + '/GetTemperatureByCityIdAndDateTemperatureNextFive/' + cityId + '/' + dateTemperature).then(response => {
@@ -35,17 +32,6 @@ function WeatherList(props: any) {
         });
     }
 
-    /*
-    const getCityNameByCityId = async (cityId) => {
-        await axios.get(citiesURL + '/' + cityId).then(response => {
-            console.log(response);
-            setCity(response.data);
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-    */
-
     const getDescriptionTemperatureById = async () => {
         await axios.get(descriptionTemperatureURL + '/').then(response => {
             console.log(response.data);
@@ -54,12 +40,6 @@ function WeatherList(props: any) {
             console.log(err);
         });
     }
-
-    /*
-    const print = () => {
-        console.log(data);
-    }
-    */
 
     const image = (id: number) => {
         for (let i = 0; i < descriptionTemperatures.length; i++) {
@@ -75,10 +55,6 @@ function WeatherList(props: any) {
     }
 
     useEffect(() => {
-        //console.log('useeffect comp');
-        //setData(prev => ({ ...prev, CityId: props.dataFromParent.CityId, TemperatureDate: props.dataFromParent.DateTemperature }));
-        //print();
-        //console.log('data from parent: ' + JSON.stringify(props.dataFromParent));
         GetTemperatureByCityIdAndDateTemperatureNextFive(props.dataFromParent.CityId, props.dataFromParent.DateTemperature);
         getDescriptionTemperatureById();
     }, [props.dataFromParent.DateTemperature])
@@ -90,8 +66,8 @@ function WeatherList(props: any) {
             {
                 nextFiveTemperatures.length > 0 ?
                     <div className="message">
-                        <h2> Next 5 Days <i className="fas fa-calendar-alt"></i> </h2>
-                        < br />
+                        <h2 className="yellowish fw-bold"> <u> Next 5 Days </u><i className="fas fa-calendar-alt"></i> </h2>
+                        <br />
                     </div>
                     : null
             }
@@ -105,16 +81,18 @@ function WeatherList(props: any) {
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body">
-                                        <h5 className="card-title">{temperature.dateTemperature ? temperature.dateTemperature.toString().split('T')[0] : null}</h5>
+                                        <h5 className="card-title fw-bold fst-italic purple">{temperature.dateTemperature ?
+                                            moment(new Date(temperature.dateTemperature.toString())).format('dddd') + ' ' +
+                                            moment(new Date(temperature.dateTemperature.toString())).format('MM/DD/YYYY') : null}</h5>
                                         <div className="row">
                                             <div className="col">
-                                                <h6 className="card-text">{temperature.maxTemperature}&deg;</h6>
-                                                <label className="card-text"><small className="text-muted">Max</small></label>
+                                                <h6 className="card-text fw-bold">{temperature.maxTemperature}&deg;</h6>
+                                                <label className="card-text"><small className="text-muted fw-bold">Max</small></label>
                                             </div>
 
                                             <div className="col">
-                                                <h6 className="card-text">{temperature.minTemperature}&deg;</h6>
-                                                <label className="card-text"><small className="text-muted">Min</small></label>
+                                                <h6 className="card-text fw-bold">{temperature.minTemperature}&deg;</h6>
+                                                <label className="card-text"><small className="text-muted fw-bold">Min</small></label>
                                             </div>
                                         </div>
                                     </div>

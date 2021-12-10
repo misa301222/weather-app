@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { useSpring } from '@react-spring/core';
 import { animated } from '@react-spring/web';
 import Swal from 'sweetalert2';
+import DarkMode from '../DarkMode/DarkMode';
 
 
 const imageURL = 'https://localhost:5001/api/UserImages';
@@ -20,6 +21,8 @@ function Profile() {
         Email: '',
         ImageURL: ''
     });
+
+    const [isSave, setIsSave] = useState(true);
 
     const [user, setUser] = useState({
         FullName: '',
@@ -50,6 +53,7 @@ function Profile() {
             console.log(response);
             setImageUser(prev => ({ ...prev, ImageURL: response.data.imageURL }));
             setImageUser(prev => ({ ...prev, Email: response.data.email }));
+            setIsSave(false);
         }).catch(err => {
             console.log(err);
         });
@@ -89,6 +93,7 @@ function Profile() {
                 showConfirmButton: false,
                 timer: 1100
             })
+            setIsSave(false);
         }).catch(err => {
             console.log(err);
         })
@@ -146,17 +151,17 @@ function Profile() {
     }, []);
 
     return (
-        <div className="container profile-container">
-            <h1> Profile </h1>
+        <div className="container profile-container container-data">
+            <h1 className="text-header yellowish">Profile <i className="fas fa-id-card"></i> </h1>
             <hr></hr>
             <Tabs
                 id="controlled-tab-example"
                 activeKey={key}
                 onSelect={(k) => setKey(k)}
-                transition={false}
+                transition={true}
                 className="mb-3">
                 <Tab eventKey="profile" title="Profile">
-                    <div className="container container-tab">
+                    <div className="container container-tab shadow">
                         <div className="row">
                             <div className="col d-flex justify-content-evenly">
                                 <animated.div className="card" style={{ transform: y.to(v => `scale(${v}`) }} onMouseEnter={() => setCard({ y: 1.2 })}
@@ -194,7 +199,7 @@ function Profile() {
                     </div>
                 </Tab>
                 <Tab eventKey="image" title="Image">
-                    <div className="container container-tab">
+                    <div className="container container-tab shadow">
                         <div className="row">
                             <div className="col d-flex justify-content-evenly">
                                 <animated.div className="card" style={{ transform: y.to(v => `scale(${v}`) }} onMouseEnter={() => setCard({ y: 1.2 })}
@@ -210,7 +215,7 @@ function Profile() {
                                 </animated.div>
                             </div>
                             <div className="col">
-                                {imageUser.ImageURL ?
+                                {!isSave ?
                                     <form className="form-profile text-start" onSubmit={handleSubmitImageURLEventEdit}>
                                         <div className="mb-3">
                                             <label htmlFor="inputImageURL" className="form-label">Image URL</label>
@@ -240,7 +245,7 @@ function Profile() {
                 </Tab>
 
                 <Tab eventKey="config" title="Config">
-                    <div className="container container-tab">
+                    <div className="container container-tab shadow">
                         <div className="row">
                             <div className="col d-flex justify-content-evenly">
                                 <animated.div className="card" style={{ transform: y.to(v => `scale(${v}`) }} onMouseEnter={() => setCard({ y: 1.2 })}
@@ -283,10 +288,41 @@ function Profile() {
                     </div>
                 </Tab>
 
+                <Tab eventKey="theme" title="Theme">
+                    <div className="container container-tab shadow">
+                        <div className="row">
+                            <div className="col d-flex justify-content-evenly">
+                                <animated.div className="card" style={{ transform: y.to(v => `scale(${v}`) }} onMouseEnter={() => setCard({ y: 1.2 })}
+                                    onMouseLeave={() => setCard({ y: 1 })}>
+                                    <img src={imageUser.ImageURL} className="card-img-top image-card" alt="ProfilePicture">
+                                    </img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{imageUser.Email}</h5>
+                                        <hr></hr>
+                                        <p className="card-text">Roles: {user.Roles} </p>
+                                        <p className="card-text">Date Created: {user.DateCreated.split('T')[0]} </p>
+                                    </div>
+                                </animated.div>
+                            </div>
+                            <div className="col">
+                                <div className="mb-3">
+                                    <label className="form-label fw-bold">Turn the lights off <i className="fas fa-adjust"></i> </label>
+
+                                </div>
+
+                                <div className="mb-3">
+                                    <DarkMode />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </Tab>
+
             </Tabs>
         </div >
     )
-
 }
 
 export default Profile;

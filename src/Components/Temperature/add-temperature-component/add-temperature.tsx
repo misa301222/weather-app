@@ -113,7 +113,7 @@ function AddTemperature() {
     }, [])
 
     return (
-        <div className="container add-temperature">
+        <div className="container add-temperature container-data">
             <div className="card">
                 <div className="card-header">
                     Add Temperature
