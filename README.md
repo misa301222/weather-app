@@ -1,70 +1,61 @@
 # Getting Started with Create React App
+Weather Web Application. Using React with Typescript. Role-base authentication (JWT). Administrator role can modify all the relevant data in the application. The user can see the information.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://user-images.githubusercontent.com/92189889/145663803-b50fd664-0314-4923-852d-9708513203df.png)
 
-## Available Scripts
+![image](https://user-images.githubusercontent.com/92189889/145663856-6607e96e-3d4a-424c-9c17-0c5da9cf3811.png)
 
-In the project directory, you can run:
+## News Section
+News section where all the news are displayed. Inside the news you can see the full note. Plus there's a Reaction component fully working.
 
-### `npm start`
+![image](https://user-images.githubusercontent.com/92189889/145663883-fd38bf2e-617f-4617-8e5f-02189d31e872.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![image](https://user-images.githubusercontent.com/92189889/145663900-4f3aaede-0be6-4739-af46-dd7d6364979f.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Historic Weather
+Historic weather section where all the data from the year is displayed. You can filter by city and year.
 
-### `npm test`
+![image](https://user-images.githubusercontent.com/92189889/145663984-547d8e52-496e-4f5e-8f4a-eab2bae78ecc.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About Us
+About Us section where all the relevant data from the company is displayed. It has a couple tabs with relevant data and useful links.
 
-### `npm run build`
+![image](https://user-images.githubusercontent.com/92189889/145664013-0dc008ad-f56b-4315-9858-f20bcf571964.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Profile
+Profile secion where you can customize your settings. Like changing the default city, change your profile picture and enable/disable dark mode.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://user-images.githubusercontent.com/92189889/145664069-61de59f4-164d-4f88-a53a-7aac080a8532.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Admin Tools
+Exclusive admin tools where you can manage all the information in the application.
 
-### `npm run eject`
+![image](https://user-images.githubusercontent.com/92189889/145664102-4c2869cb-ea7b-4372-90b4-47b36d7c7888.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## JobApplication Managment
+JobApplication Managment section in which the administrators can reject, accept or send back to pending the applications sent by the users.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://user-images.githubusercontent.com/92189889/145664121-1d23102f-bd13-4381-acfa-688b6cb49c54.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Weather Details And Notifications
+By clicking in "See Details" you can see all the temperature information. And by clicking show notifications you can see the notifications by date and city.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![image](https://user-images.githubusercontent.com/92189889/145664196-95d1b531-cfe6-421e-b066-246c93b80eca.png)
 
-## Learn More
+![image](https://user-images.githubusercontent.com/92189889/145664204-716cc203-f948-4f7a-aa43-800f064e75c7.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Dark Mode
+Fully functional Dark Mode toggle.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![image](https://user-images.githubusercontent.com/92189889/145664231-05cd5983-d1ab-43ed-ac4c-f3920bbc2db9.png)
 
-### Code Splitting
+## Animations
+![React App - Opera 2021-12-10 20-55-10_Trim](https://user-images.githubusercontent.com/92189889/145664459-826de74a-f503-48b9-8895-9a6ebf7b53fc.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
